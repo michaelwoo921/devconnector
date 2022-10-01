@@ -1,10 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const Alert = () => {
-    const alerts = [
-        {id:1, msg: 'Invalid credentials', alertType: 'danger'},
-        {id:2, msg: 'Successfully logged in', alertType: 'success'}
-    ]
+const Alert = ({alerts}) => {
 
   return ( 
     alerts && alerts.length >0 &&
@@ -23,4 +20,8 @@ const Alert = () => {
   )
 }
 
-export default Alert
+const mapStateToProps = state => ({
+    alerts: state.alert
+})
+
+export default connect(mapStateToProps)(Alert)

@@ -5,14 +5,14 @@ import {Link} from 'react-router-dom'
 
 const Navbar = () => {
 
-  const [isAuthenticated, setIsAuthenticaed] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const guestLinks = (
     <ul>
       <li><Link to="/profiles">Developers</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login"
-        onClick = { () => setIsAuthenticaed(true)}
+          onClick ={() => setIsAuthenticated(true)}
       >Login</Link></li>
     </ul>
   )
@@ -29,8 +29,8 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <a href="#!" title="Logout"
-           onClick = { () => setIsAuthenticaed(false)}
+        <a href="#!" title="Logout" 
+        onClick ={() => setIsAuthenticated(false)}
         >
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">{' '} Logout</span>
