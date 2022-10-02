@@ -3,6 +3,7 @@ import React, {useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import store from './store';
+import { loadUser } from './actions/auth';
 
 
 import Navbar from './component/layout/Navbar';
@@ -21,6 +22,10 @@ import NotFound from './component/layout/NotFound';
 
 function App() {
 
+  useEffect(() => {
+    store.dispatch(loadUser())
+    console.log('ran')
+  }, [])
   return (
     <Provider store={store}>
       <Router>  

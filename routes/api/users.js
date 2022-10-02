@@ -43,7 +43,9 @@ router.post('/',
         // return jsonwebtoken
         const payload = {user: {id: user.id}}
         const jwtSecret = process.env.jwtSecret
-        jwt.sign(payload, jwtSecret, (err, token) => {
+        jwt.sign(payload, jwtSecret,{
+            expiresIn: '24h'
+        }, (err, token) => {
             if(err) throw err;
             res.json({token})
         })
