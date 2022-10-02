@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import setAlert from '../../actions/alert';
+import {setAlert} from '../../actions/alert';
 import {connect} from 'react-redux'
 
 const Login = ({setAlert}) => {

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, {useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import store from './store';
@@ -20,6 +20,7 @@ import NotFound from './component/layout/NotFound';
 
 
 function App() {
+
   return (
     <Provider store={store}>
       <Router>  

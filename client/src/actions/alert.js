@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { REMOVE_ALERT, SET_ALERT } from "./type";
 
-const setAlert = (msg, alertType) => async dispatch => {
+export const setAlert = (msg, alertType) => async dispatch => {
     try {
         const id = uuidv4()
         dispatch({
@@ -27,5 +27,3 @@ const setAlert = (msg, alertType) => async dispatch => {
         console.log('error with setAlert')
     }
 }
-
-export default setAlert;

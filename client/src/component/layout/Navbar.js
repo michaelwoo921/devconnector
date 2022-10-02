@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
+import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 
 
-const Navbar = () => {
+const Navbar = ({auth: {isAuthenticated, loading}}) => {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  console.log('auth, loading', isAuthenticated, loading)
   const guestLinks = (
     <ul>
       <li><Link to="/profiles">Developers</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login"
-          onClick ={() => setIsAuthenticated(true)}
       >Login</Link></li>
     </ul>
   )
@@ -30,7 +29,6 @@ const Navbar = () => {
       </li>
       <li>
         <a href="#!" title="Logout" 
-        onClick ={() => setIsAuthenticated(false)}
         >
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">{' '} Logout</span>
@@ -44,9 +42,20 @@ const Navbar = () => {
     <h1>
       <Link to="/"><i className="fas fa-code"></i> DevConnector</Link>
     </h1>
-    {isAuthenticated ? authLinks : guestLinks}
+      {true && (
+          <Fragment>
+          { isAuthenticated ? authLinks : guestLinks }
+          </Fragment>
+        )   
+      }
+    
+   
   </nav>
   )
 }
 
-export default Navbar
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(Navbar)
