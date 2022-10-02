@@ -1,12 +1,11 @@
 import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import { logout } from '../../actions/auth';
 
 
 
-const Navbar = ({auth: {isAuthenticated, loading}}) => {
-
-  console.log('auth, loading', isAuthenticated, loading)
+const Navbar = ({logout, auth: {isAuthenticated, loading}}) => {
   const guestLinks = (
     <ul>
       <li><Link to="/profiles">Developers</Link></li>
@@ -29,6 +28,7 @@ const Navbar = ({auth: {isAuthenticated, loading}}) => {
       </li>
       <li>
         <a href="#!" title="Logout" 
+        onClick = {logout}
         >
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">{' '} Logout</span>
@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, {logout})(Navbar)

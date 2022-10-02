@@ -18,13 +18,16 @@ import Dashboard from './component/dashboard/dashboard';
 import Alert from './component/layout/Alert';
 // import Spinner from './component/layout/Spinner';
 import NotFound from './component/layout/NotFound';
+import setAuthToken from './utils/setAuthToken';
 
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
 
 function App() {
 
   useEffect(() => {
     store.dispatch(loadUser())
-    console.log('ran')
   }, [])
   return (
     <Provider store={store}>
@@ -51,5 +54,6 @@ function App() {
   
   );
 }
+
 
 export default App;

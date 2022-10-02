@@ -1,13 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import {setAlert} from '../../actions/alert';
+import { login } from '../../actions/auth';
 import {connect} from 'react-redux'
 
-const Login = ({setAlert}) => {
+const Login = ({setAlert, login}) => {
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const {email, password} = formData;
+
+  const onChange = e => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
   const onSubmit = e => {
     e.preventDefault();
-    setAlert('login failed', 'danger')
+    login(email, password)
   }
 
   return (
@@ -21,6 +35,8 @@ const Login = ({setAlert}) => {
             placeholder="Email Address"
             name="email"
             required
+            value={email}
+            onChange ={ onChange}
           />
         </div>
         <div className="form-group">
@@ -28,6 +44,8 @@ const Login = ({setAlert}) => {
             type="password"
             placeholder="Password"
             name="password"
+            value={password}
+            onChange ={ onChange}
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Login"
@@ -41,4 +59,4 @@ const Login = ({setAlert}) => {
   )
 }
 
-export default connect(null, {setAlert})(Login)
+export default connect(null, {setAlert, login})(Login)
