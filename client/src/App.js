@@ -5,6 +5,8 @@ import {Provider} from 'react-redux'
 import store from './store';
 import { loadUser } from './actions/auth';
 
+import PrivateRoute from './component/routing/PrivateRoute';
+import GuestRoute from './component/routing/GuestRoute';
 
 import Navbar from './component/layout/Navbar';
 import Landing from './component/layout/Landing';
@@ -36,14 +38,14 @@ function App() {
         <Alert />
      
         <Routes>     
-        <Route path='/' element = { <Landing /> }/>
-        <Route path='/dashboard' element = { <Dashboard /> }/>
-        <Route path='/register' element = { <Register /> }/>
-        <Route path='/login' element = { <Login /> }/>
+        <Route path='/' element = { <GuestRoute><Landing /></GuestRoute> }/>
+        <Route path='/dashboard' element = { <PrivateRoute><Dashboard /></PrivateRoute> }/>
+        <Route path='/register' element = { <GuestRoute><Register /></GuestRoute> }/>
+        <Route path='/login' element = { <GuestRoute><Login /></GuestRoute> }/>
         <Route path='/profiles' element = { <Profiles /> }/>
         <Route path='/profile' element = { <Profile /> }/>
-        <Route path='/posts' element = { <Posts /> }/>
-        <Route path='/post' element = { <Post /> }/>
+        <Route path='/posts' element = { <PrivateRoute><Posts /></PrivateRoute> }/>
+        <Route path='/post' element = { <PrivateRoute><Post /></PrivateRoute> }/>
         <Route path='*' element = { <NotFound /> }/>
       </Routes>
 
