@@ -1,7 +1,8 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
 const User = require('../../models/User')
 
 
@@ -25,7 +26,9 @@ router.post('/',
 
     try{ 
         // validate user
+        //get avatar
         // encrypt password
+        
         // save user to database
         let {name, email, password} = req.body;
         let user = await User.findOne({email});
@@ -34,9 +37,10 @@ router.post('/',
                 errors: [ { msg: 'User already exists' }]
             })
         }
+        const avatar = gravatar.url(email, {s:'200', r: 'pg', d: 'mm'})
 
         const salt = await bcrypt.genSalt(10);
-        user = new User({name, email, password});
+        user = new User({name, email, password, avatar});
         user.password = await bcrypt.hash(password, salt)
         await user.save();
 

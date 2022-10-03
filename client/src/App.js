@@ -43,7 +43,7 @@ function App() {
         <Route path='/register' element = { <GuestRoute><Register /></GuestRoute> }/>
         <Route path='/login' element = { <GuestRoute><Login /></GuestRoute> }/>
         <Route path='/profiles' element = { <Profiles /> }/>
-        <Route path='/profile' element = { <Profile /> }/>
+        <Route path='/profile/:id' element = { <Profile /> }/>
         <Route path='/posts' element = { <PrivateRoute><Posts /></PrivateRoute> }/>
         <Route path='/post' element = { <PrivateRoute><Post /></PrivateRoute> }/>
         <Route path='*' element = { <NotFound /> }/>
