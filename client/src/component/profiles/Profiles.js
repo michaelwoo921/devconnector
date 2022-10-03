@@ -8,7 +8,6 @@ const Profiles = ({getProfiles, profile: {profiles, loading}}) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
-  console.log(loading, profiles)
 
   return ( !loading && profiles.length>0 &&
     <section className="container">

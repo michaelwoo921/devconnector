@@ -1,6 +1,7 @@
 import { 
     GET_PROFILES,
-    PROFILE_ERROR
+    PROFILE_ERROR,
+    GET_PROFILE
  } from "../actions/type"
 const initialState ={
     profiles: [],
@@ -15,6 +16,12 @@ const profile = (state=initialState, action) => {
             return {
                 ...state,
                 profiles: payload,
+                loading: false
+            }
+        case GET_PROFILE:
+            return {
+                ...state,
+                profile: payload,
                 loading: false
             }
         case PROFILE_ERROR:
