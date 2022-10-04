@@ -6,10 +6,10 @@ import { register } from '../../actions/auth';
 
 const Register = ({setAlert, register}) => {
   const [formData, setFormData] =useState({
-    name: 'abcd',
-    email: 'michaelwoo921@gmail.com',
-    password: '123456',
-    password2: 'password'
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
   })
 
   const {name, email, password, password2} = formData;

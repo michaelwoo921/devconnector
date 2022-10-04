@@ -1,46 +1,58 @@
-import React, {useEffect} from 'react'
-import {connect} from 'react-redux'
-import { getCurrentProfile} from '../../actions/profile'
-import Experience from './Experience'
-import Education from './Education'
-import DashboardActions from './DashboardActions'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
-const Dashboard = ({profile: {profile, loading}, getCurrentProfile}) => {
+const Dashboard = ({
+  getCurrentProfile,
+  deleteAccount,
+  auth: { user },
+  profile: { profile }
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
 
-    useEffect(() => {
-      getCurrentProfile()
-    }, [getCurrentProfile])
-
-    console.log(loading, profile)
-    if(loading || !profile){
-      return null
-    }
-
-    const { user, education, experience} = profile
   return (
-    
     <section className="container">
-    <h1 className="large text-primary">
-      Dashboard
-    </h1>
-    <p className="lead"><i className="fas fa-user"></i> Welcome {user.name}</p>
-    <DashboardActions />
-    <Experience experience ={experience}/>
-    <Education education={education}/>
+      <h1 className="large text-primary">Dashboard</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Welcome {user && user.name}
+      </p>
+      {profile !== null ? (
+        <>
+          <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
 
-    <div className="my-2">
-        <button className="btn btn-danger">
-            <i className="fas fa-user-minus"></i>
+          <div className="my-2">
+            <button className="btn btn-danger" onClick={() => deleteAccount()}>
+              <i className="fas fa-user-minus" /> Delete My Account
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <p>You have not yet setup a profile, please add some info</p>
+          <Link to="/create-profile" className="btn btn-primary my-1">
+            Create Profile
+          </Link>
+        </>
+      )}
+    </section>
+  );
+};
 
-            Delete My Account
-        </button>
-      </div>
-  </section>
-  )
-}
 
-const mapStateToProps = state => ({
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
   profile: state.profile
-})
+});
 
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard)
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
+  Dashboard
+);

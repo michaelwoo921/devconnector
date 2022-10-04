@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import { getGithubRepos } from '../../actions/profile'
 
 const ProfileGithub = ({username, getGithubRepos, profile:{repos}}) => {
-  console.log('***',username)
+
 
   useEffect(() => {
     getGithubRepos(username);
   }, [getGithubRepos, username])
-  console.log(repos)
+
   return (
 
     <div className="profile-github">

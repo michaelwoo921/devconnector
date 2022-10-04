@@ -2,7 +2,9 @@ import {
     GET_PROFILES,
     PROFILE_ERROR,
     GET_PROFILE,
-    GET_REPOS
+    GET_REPOS,
+    UPDATE_PROFILE,
+    CLEAR_PROFILE
  } from "../actions/type"
 const initialState ={
     profiles: [],
@@ -21,11 +23,13 @@ const profile = (state=initialState, action) => {
                 loading: false
             }
         case GET_PROFILE:
+        case UPDATE_PROFILE:
             return {
                 ...state,
                 profile: payload,
                 loading: false
             }
+
         case PROFILE_ERROR:
             return {
                 ...state,
@@ -40,6 +44,15 @@ const profile = (state=initialState, action) => {
                 repos: payload,
                 loading: false,
             }
+
+        case CLEAR_PROFILE:
+            return {
+                profiles: [],
+                profile: null,
+                loading: false,
+                repos: []
+            }
+
         default:
             return state;
     }

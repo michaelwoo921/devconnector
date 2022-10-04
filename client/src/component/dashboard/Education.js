@@ -1,7 +1,9 @@
 import React, {Fragment} from 'react'
 import Moment from 'react-moment'
+import {connect} from 'react-redux'
+import { deleteEducation } from '../../actions/profile'
 
-const Education = ({education}) => {
+const Education = ({education, deleteEducation}) => {
   return (
     <Fragment>
       <h2 className="my-2">Education Credentials</h2>
@@ -17,7 +19,7 @@ const Education = ({education}) => {
             </thead>
             <tbody>
               {education.map(edu => (
-                  <tr>
+                  <tr key={edu._id}>
                   <td>{edu.school}</td>
                   <td className="hide-sm">{edu.degree}</td>
                   
@@ -26,7 +28,9 @@ const Education = ({education}) => {
                  - {edu.to ? (<Moment format = "MM/DD/YYYY">{edu.to}</Moment>) : ' Now'}
               </td>
                   <td>
-                    <button className="btn btn-danger">
+                    <button className="btn btn-danger" onClick ={
+                      () => deleteEducation(edu._id)
+                    }>
                       Delete
                     </button>
                   </td>
@@ -41,4 +45,4 @@ const Education = ({education}) => {
   )
 }
 
-export default Education
+export default connect(null, {deleteEducation})(Education)

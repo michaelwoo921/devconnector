@@ -10,7 +10,6 @@ const auth = (req, res, next) => {
         const jwtSecret = process.env.jwtSecret
         const decoded = jwt.verify(token, jwtSecret)
         
-        console.log(decoded.user, 'decoded.user')
         req.user = decoded.user;
         next()
 

@@ -280,7 +280,6 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     try {
       const profile = await Profile.findOne({ user: req.user.id });
       profile.experience = profile.experience.filter((item) => {
-        console.log(item.id, req.params.exp_id);
         return item.id != req.params.exp_id;
       });
       await profile.save();

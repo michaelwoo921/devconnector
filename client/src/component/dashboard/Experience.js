@@ -1,7 +1,9 @@
 import React, {Fragment} from 'react'
 import Moment from 'react-moment'
+import {connect} from 'react-redux'
+import { deleteExperience } from '../../actions/profile'
 
-const Experience = ({experience}) => {
+const Experience = ({experience, deleteExperience}) => {
   return (
     <Fragment>
        <h2 className="my-2">Experience Credentials</h2>
@@ -25,7 +27,9 @@ const Experience = ({experience}) => {
                  - {exp.to ? (<Moment format = "MM/DD/YYYY">{exp.to}</Moment>) : ' Now'}
               </td>
               <td>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick = {() => {
+                  deleteExperience(exp._id)
+                }}>
                   Delete
                 </button>
               </td>
@@ -38,4 +42,4 @@ const Experience = ({experience}) => {
   )
 }
 
-export default Experience
+export default connect(null, {deleteExperience})(Experience)
