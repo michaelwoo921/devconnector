@@ -16,7 +16,7 @@ import Profiles from './component/profiles/Profiles';
 import Profile from './component/profile/Profile';
 import Posts from './component/posts/Posts';
 import Post from './component/post/Post';
-import Dashboard from './component/dashboard/dashboard';
+import Dashboard from './component/dashboard/Dashboard';
 import Alert from './component/layout/Alert';
 // import Spinner from './component/layout/Spinner';
 import NotFound from './component/layout/NotFound';

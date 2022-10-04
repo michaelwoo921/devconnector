@@ -1,12 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import { getCurrentProfile} from '../../actions/profile'
 
-const dashboard = () => {
+const Dashboard = ({profile: {profile, loading}, getCurrentProfile}) => {
+
+    useEffect(() => {
+      getCurrentProfile()
+    }, [getCurrentProfile])
+
+    console.log(loading, profile)
+    if(loading || !profile){
+      return null
+    }
+
+    const { user, education, experience} = profile
   return (
+    
     <section className="container">
     <h1 className="large text-primary">
       Dashboard
     </h1>
-    <p className="lead"><i className="fas fa-user"></i> Welcome John Doe</p>
+    <p className="lead"><i className="fas fa-user"></i> Welcome {user.name}</p>
     <div className="dash-buttons">
       <a href="edit-profile.html" className="btn btn-light"
         ><i className="fas fa-user-circle text-primary"></i> Edit Profile</a
@@ -94,4 +108,8 @@ const dashboard = () => {
   )
 }
 
-export default dashboard
+const mapStateToProps = state => ({
+  profile: state.profile
+})
+
+export default connect(mapStateToProps, {getCurrentProfile})(Dashboard)

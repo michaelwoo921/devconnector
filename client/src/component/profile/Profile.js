@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { getProfileById } from '../../actions/profile'
 import ProfileTop from './ProfileTop'
-import ProfileAbout from './ProfileAout'
+import ProfileAbout from './ProfileAbout'
 import ProfileGithub from './ProfileGithub'
 import ProfileExperience from './ProfileExperience'
 import ProfileEducation from './ProfileEducation'
@@ -16,11 +16,9 @@ const Profile = ({getProfileById, profile: {profile, loading}}) => {
     getProfileById(id)
   }, [getProfileById, id])
 
-  console.log(loading, profile)
-
   return ( !loading && profile &&
     <section className="container">
-    <a href="profiles.html" className="btn btn-light">Back To Profiles</a>
+    <Link to="/profiles" className="btn btn-light">Back To Profiles</Link>
 
     <div className="profile-grid my-1">
       <ProfileTop profile = {profile}/>
@@ -28,14 +26,25 @@ const Profile = ({getProfileById, profile: {profile, loading}}) => {
      
       <div className="profile-exp bg-white p-2">
         <h2 className="text-primary">Experience</h2>
-        <ProfileExperience />      
+        {profile.experience.length >0 ? (
+          profile.experience.map(experience => <ProfileExperience key={experience._id} experience ={experience} />    )
+        ): (
+          <h4> No Experience credential</h4>
+        )}
+           
       </div>
       <div className="profile-edu bg-white p-2">
         <h2 className="text-primary">Education</h2>
-        <ProfileEducation />
+        {profile.education.length >0 ? (
+          profile.education.map(education => <ProfileEducation key={education._id} education ={education} /> )
+        ): (
+          <h4> No Education credential</h4>
+        )}
+        
       </div>
-     <ProfileGithub />
-
+      {profile.githubusername && (
+        <ProfileGithub username = {profile.githubusername}/>
+      )}
     </div>
   </section>
   )
