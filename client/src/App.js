@@ -18,6 +18,10 @@ import Posts from './component/posts/Posts';
 import Post from './component/post/Post';
 import Dashboard from './component/dashboard/Dashboard';
 import Alert from './component/layout/Alert';
+import AddEducation from './component/profile-form/AddEducation';
+import AddExperience from './component/profile-form/AddExperience';
+import CreateProfile from './component/profile-form/CreateProfile';
+import EditProfile from './component/profile-form/EditProfile'
 // import Spinner from './component/layout/Spinner';
 import NotFound from './component/layout/NotFound';
 import setAuthToken from './utils/setAuthToken';
@@ -44,8 +48,12 @@ function App() {
         <Route path='/login' element = { <GuestRoute><Login /></GuestRoute> }/>
         <Route path='/profiles' element = { <Profiles /> }/>
         <Route path='/profile/:id' element = { <Profile /> }/>
+        <Route path='/add-education' element = { <PrivateRoute><AddEducation /></PrivateRoute> }/>
+        <Route path='/add-experience' element = { <PrivateRoute><AddExperience /></PrivateRoute> }/>
+        <Route path='/create-profile' element = { <PrivateRoute><CreateProfile /></PrivateRoute> }/>
+        <Route path='/edit-profile' element = { <PrivateRoute><EditProfile /></PrivateRoute> }/>
         <Route path='/posts' element = { <PrivateRoute><Posts /></PrivateRoute> }/>
-        <Route path='/post' element = { <PrivateRoute><Post /></PrivateRoute> }/>
+        <Route path='/post/:id' element = { <PrivateRoute><Post /></PrivateRoute> }/>
         <Route path='*' element = { <NotFound /> }/>
       </Routes>
 
