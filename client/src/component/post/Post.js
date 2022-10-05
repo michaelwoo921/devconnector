@@ -2,8 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 
 import {Link, useParams} from 'react-router-dom'
-import Moment from 'react-moment'
-import {addComment, getPost} from '../../actions/post';
+import {getPost} from '../../actions/post';
 import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
