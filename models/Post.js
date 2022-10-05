@@ -16,11 +16,11 @@ const PostSchema = new mongoose.Schema({
         type: String
     },
     likes: [
-        { user: mongoose.Schema.Types.ObjectId, ref: 'User' }
+        { user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}}
     ],
     comments: [
         {
-            user: mongoose.Schema.Types.ObjectId, ref: 'User',
+            user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
             text: { type: String},
             name: { type: String},
             avatar: { type: String},
